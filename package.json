@@ -1,0 +1,13 @@
+{
+  "name": "vantage-point-digital-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vantage Point Digital website: static pages with a Vercel serverless contact endpoint.",
+  "scripts": {
+    "dev": "vercel dev",
+    "test": "node test/contact.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

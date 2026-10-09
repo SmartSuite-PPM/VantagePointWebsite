@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact &mdash; Vantage Point Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#001F3F;
+    --midnight-deep:#001529;
+    --card:#062A4D;
+    --card-border:#123A5E;
+    --cyan:#00FFFF;
+    --cyan-soft:#4DFFFF;
+    --silver:#A9B7C0;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--midnight);
+    color:var(--silver);
+    font-family:'Open Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Montserrat', sans-serif;
+    color:var(--white);
+    line-height:1.2;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  img{max-width:100%; display:block;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(0,31,63,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--card-border);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:30px; height:30px;}
+  .brand-name{font-family:'Montserrat'; font-weight:700; font-size:15px; color:var(--white); letter-spacing:0.04em;}
+  .nav-links{display:flex; gap:36px; font-size:14px; font-weight:600; color:var(--silver);}
+  .nav-links a:hover{color:var(--cyan-soft);}
+  .nav-cta{
+    border:1px solid var(--cyan); color:var(--cyan);
+    padding:10px 22px; border-radius:2px; font-size:13px; font-weight:600;
+    letter-spacing:0.03em; transition:all .2s ease;
+  }
+  .nav-cta:hover{background:var(--cyan); color:var(--midnight-deep);}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:120px 0 140px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;
+  }
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--cyan-soft); margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:28px; height:1px; background:var(--cyan-soft);}
+  .hero h1{
+    font-size:48px; font-weight:700; margin-bottom:24px;
+  }
+  .hero h1 span{color:var(--cyan-soft);}
+  .hero p.lead{
+    font-size:17px; color:var(--silver); max-width:480px; margin-bottom:38px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cyan); color:var(--midnight-deep); font-weight:600; font-size:14px;
+    padding:15px 30px; border-radius:2px; letter-spacing:0.02em; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,255,255,0.18);}
+  .btn-ghost{
+    border:1px solid var(--card-border); color:var(--white); font-weight:600; font-size:14px;
+    padding:15px 30px; border-radius:2px; transition:border-color .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--silver);}
+
+  .hero-visual{position:relative; height:420px;}
+  .hero-visual svg{width:100%; height:100%;}
+  .node-glow{filter:drop-shadow(0 0 10px var(--cyan)) drop-shadow(0 0 22px rgba(0,255,255,0.5));}
+
+  /* CLIENT STRIP */
+  .client-strip{
+    background:var(--midnight-deep); border-bottom:1px solid var(--card-border);
+    padding:22px 0;
+  }
+  .client-strip-inner{
+    position:relative; max-width:1160px; margin:0 auto; padding:0 32px;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%);
+  }
+  .client-float-label{
+    font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--silver); text-align:center; margin-bottom:18px;
+  }
+  .client-logos{
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+  }
+  .client-logo{
+    font-family:'Montserrat'; font-weight:700; font-size:17px; letter-spacing:0.01em;
+    color:var(--silver); opacity:0.85; transition:opacity .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .client-logo:hover{opacity:1; color:var(--white);}
+  .client-logo .accent{color:var(--cyan-soft);}
+
+  /* SECTION LABELS */
+  .section{padding:100px 0;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--cyan-soft); margin-bottom:16px;
+  }
+  .section h2{font-size:32px; font-weight:700; margin-bottom:18px;}
+  .section-head p{font-size:16px; color:var(--silver);}
+
+  /* LIFECYCLE / SERVICES */
+  .lifecycle{background:var(--midnight-deep); border-top:1px solid var(--card-border); border-bottom:1px solid var(--card-border);}
+  .lifecycle-track{position:relative;}
+  .lifecycle-line{
+    position:absolute; top:29px; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, var(--card-border), var(--cyan-soft) 50%, var(--card-border));
+    opacity:0.5;
+  }
+  .lifecycle-steps{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:24px; position:relative;
+  }
+  .step{position:relative;}
+  .step-num{
+    width:58px; height:58px; border-radius:50%;
+    background:var(--midnight); border:1px solid var(--cyan-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Montserrat'; font-weight:700; font-size:15px; color:var(--cyan-soft);
+    margin-bottom:22px; position:relative; z-index:2;
+  }
+  .step h3{font-size:16px; margin-bottom:10px; line-height:1.3;}
+  .step p{font-size:13.5px; color:var(--silver);}
+
+  /* VALUE PILLARS */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--card-border); border:1px solid var(--card-border);}
+  .pillar{background:var(--midnight); padding:40px 34px;}
+  .pillar-icon{
+    width:40px; height:40px; margin-bottom:26px; position:relative;
+  }
+  .pillar h3{font-size:19px; margin-bottom:14px;}
+  .pillar p{font-size:14.5px; color:var(--silver);}
+
+  /* CASE STUDY */
+  .case-study{
+    background:var(--card); border:1px solid var(--card-border); border-radius:4px;
+    padding:56px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:stretch;
+  }
+  .case-tag{
+    display:inline-block; font-size:11.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--cyan-soft); border:1px solid var(--cyan-soft); padding:5px 12px; border-radius:2px; margin-bottom:20px;
+  }
+  .case-study h3{font-size:26px; margin-bottom:18px;}
+  .case-metrics{display:flex; gap:40px; margin-top:30px;}
+  .metric-num{font-family:'Montserrat'; font-weight:700; font-size:30px; color:var(--white); display:block;}
+  .metric-label{font-size:12.5px; color:var(--silver); letter-spacing:0.03em;}
+  .case-visual{position:relative; min-height:100%;}
+  .case-visual svg{width:100%; height:100%; display:block;}
+
+  /* ABOUT TEASER */
+  .about-teaser{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;
+  }
+  .founders{display:flex; flex-direction:column; gap:26px;}
+  .founder{display:flex; gap:16px; align-items:flex-start;}
+  .founder-mark{
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
+    background:var(--card); border:1px solid var(--card-border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Montserrat'; font-weight:700; font-size:14px; color:var(--cyan-soft);
+  }
+  .founder h4{font-size:15.5px; color:var(--white); margin-bottom:4px;}
+  .founder p{font-size:13.5px; color:var(--silver);}
+
+  /* CTA BAND */
+  .cta-band{
+    background:var(--midnight-deep); border-top:1px solid var(--card-border);
+    padding:110px 0; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-band h2{font-size:34px; max-width:600px; margin:0 auto 20px;}
+  .cta-band p{font-size:16px; color:var(--silver); max-width:480px; margin:0 auto 40px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--card-border); padding:48px 0;}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+  .footer-links{display:flex; gap:28px; font-size:13px; color:var(--silver);}
+  .footer-links a:hover{color:var(--cyan-soft);}
+  .footer-copy{font-size:12.5px; color:#5C6F7E;}
+
+  @media (max-width:920px){
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:280px; order:-1;}
+    .hero h1{font-size:36px;}
+    .pillars{grid-template-columns:1fr;}
+    .lifecycle-steps{grid-template-columns:repeat(2,1fr);}
+    .lifecycle-line{display:none;}
+    .case-study{grid-template-columns:1fr; padding:36px;}
+    .about-teaser{grid-template-columns:1fr; gap:40px;}
+    .client-strip-inner{-webkit-mask-image:linear-gradient(90deg, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%);}
+    .client-logos{justify-content:center; gap:20px 28px;}
+    .client-logo{font-size:14px;}
+  }
+</style>
+
+<style>
+  .page-header{padding:100px 0 60px; text-align:center;}
+  .page-header h1{font-size:42px; max-width:640px; margin:0 auto 20px;}
+  .page-header p{font-size:16.5px; max-width:560px; margin:0 auto; color:var(--silver);}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .contact-info{display:flex; flex-direction:column; gap:32px;}
+  .info-card{
+    background:var(--card); border:1px solid var(--card-border); border-radius:4px; padding:32px;
+  }
+  .info-card h3{font-size:15px; margin-bottom:10px;}
+  .info-card p{font-size:14px; color:var(--silver); margin-bottom:16px;}
+  .info-card a.link-line{font-size:14px; color:var(--cyan-soft); font-weight:600;}
+  .info-card a.link-line:hover{color:var(--white);}
+
+  form{display:flex; flex-direction:column; gap:20px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  label{
+    display:block; font-size:12.5px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--silver); margin-bottom:8px;
+  }
+  input, select, textarea{
+    width:100%; background:var(--card); border:1px solid var(--card-border); border-radius:3px;
+    padding:13px 16px; color:var(--white); font-family:'Open Sans'; font-size:14.5px;
+    outline:none; transition:border-color .2s ease;
+  }
+  input::placeholder, textarea::placeholder{color:#5C6F7E;}
+  input:focus, select:focus, textarea:focus{border-color:var(--cyan-soft);}
+  textarea{resize:vertical; min-height:120px;}
+  select{appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A9B7C0' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center;}
+  .submit-btn{
+    background:var(--cyan); color:var(--midnight-deep); font-weight:600; font-size:14px;
+    padding:15px 30px; border-radius:2px; border:none; cursor:pointer; letter-spacing:0.02em;
+    transition:transform .2s ease, box-shadow .2s ease; align-self:flex-start; font-family:'Open Sans';
+  }
+  .submit-btn:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,255,255,0.18);}
+  .form-note{font-size:12.5px; color:#5C6F7E; margin-top:-6px;}
+  .form-error{display:none; font-size:14px; color:#FF8A8A; border:1px solid #6B2B2B; border-radius:3px; padding:14px 16px;}
+  .submit-btn:disabled{opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none;}
+  .form-success{
+    display:none; background:var(--card); border:1px solid var(--cyan-soft); border-radius:4px;
+    padding:28px; font-size:14.5px; color:var(--white);
+  }
+  @media (max-width:920px){
+    .contact-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand" style="display:flex;align-items:center;gap:12px;">
+      <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
+        <path d="M15 68 L38 42 L50 55 L62 30 L85 68" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="85" cy="20" r="5" fill="#00FFFF"/>
+        <line x1="62" y1="30" x2="85" y2="20" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">VANTAGE POINT DIGITAL</span>
+    </a>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="case-studies.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="insights.html">Insights</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Book a call</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Contact</div>
+    <h1>Let's talk about your portfolio</h1>
+    <p>Tell us where you are in the lifecycle, from diligence to exit, and we'll get back to you within one business day.</p>
+  </div>
+</header>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap contact-grid">
+
+    <div class="contact-info">
+      <div class="info-card">
+        <h3>Book a call directly</h3>
+        <p>Prefer to skip the form? Grab a slot on our calendar.</p>
+        <a href="#" class="link-line">Calendar link coming soon &rarr;</a>
+      </div>
+      <div class="info-card">
+        <h3>Email us</h3>
+        <p>For anything that doesn't fit a form.</p>
+        <a href="#" class="link-line">Email address coming soon &rarr;</a>
+      </div>
+      <div class="info-card">
+        <h3>LinkedIn</h3>
+        <p>Follow our updates and insights.</p>
+        <a href="#" class="link-line">LinkedIn page coming soon &rarr;</a>
+      </div>
+    </div>
+
+    <div>
+      <form id="contact-form">
+        <div class="field-row">
+          <div>
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label for="company">Company / fund</label>
+            <input type="text" id="company" name="company" placeholder="Acme Capital" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" placeholder="jane@acmecapital.com" required>
+          </div>
+          <div>
+            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="+44 7700 900000">
+          </div>
+        </div>
+        <div>
+          <label for="stage">Where are you in the lifecycle?</label>
+          <select id="stage" name="stage">
+            <option value="">Select a stage</option>
+            <option value="due-diligence">Tech, data &amp; operational due diligence</option>
+            <option value="integration">Post-acquisition integration</option>
+            <option value="ai-transformation">Data &amp; AI transformation</option>
+            <option value="value-creation">Portfolio value creation</option>
+            <option value="exit-readiness">Exit readiness</option>
+            <option value="cyber">Cyber security assessment</option>
+            <option value="not-sure">Not sure yet</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us a bit about your portfolio and what you're looking to achieve." required></textarea>
+        </div>
+        <div style="position:absolute;left:-9999px;" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="form-note">By submitting, you agree to be contacted by Vantage Point Digital about your enquiry.</p>
+        <button type="submit" class="submit-btn" id="submit-btn">Send message</button>
+        <div class="form-error" id="form-error" role="alert"></div>
+      </form>
+
+      <div class="form-success" id="form-success">
+        Thanks &mdash; your message has been received. Our team will be in touch within one business day.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
+        <path d="M15 68 L38 42 L50 55 L62 30 L85 68" stroke="#A9B7C0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="85" cy="20" r="5" fill="#00FFFF"/>
+        <line x1="62" y1="30" x2="85" y2="20" stroke="#A9B7C0" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name" style="color:var(--silver);">VANTAGE POINT DIGITAL</span>
+    </div>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="case-studies.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Vantage Point Digital. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  var form = document.getElementById('contact-form');
+  var button = document.getElementById('submit-btn');
+  var errorBox = document.getElementById('form-error');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    var payload = {};
+    new FormData(form).forEach(function (value, key) { payload[key] = value; });
+
+    try {
+      var response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var result = await response.json().catch(function () { return {}; });
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong. Please try again.');
+      }
+
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } catch (err) {
+      errorBox.textContent = err.message || 'Something went wrong. Please try again.';
+      errorBox.style.display = 'block';
+      button.disabled = false;
+      button.textContent = 'Send message';
+    }
+  });
+</script>
+
+</body>
+</html>

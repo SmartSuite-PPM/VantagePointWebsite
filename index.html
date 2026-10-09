@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vantage Point Digital — Digital Transformation and AI for Private Equity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#001F3F;
+    --midnight-deep:#001529;
+    --card:#062A4D;
+    --card-border:#123A5E;
+    --cyan:#00FFFF;
+    --cyan-soft:#4DFFFF;
+    --silver:#A9B7C0;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--midnight);
+    color:var(--silver);
+    font-family:'Open Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Montserrat', sans-serif;
+    color:var(--white);
+    line-height:1.2;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  img{max-width:100%; display:block;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(0,31,63,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--card-border);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:30px; height:30px;}
+  .brand-name{font-family:'Montserrat'; font-weight:700; font-size:15px; color:var(--white); letter-spacing:0.04em;}
+  .nav-links{display:flex; gap:36px; font-size:14px; font-weight:600; color:var(--silver);}
+  .nav-links a:hover{color:var(--cyan-soft);}
+  .nav-cta{
+    border:1px solid var(--cyan); color:var(--cyan);
+    padding:10px 22px; border-radius:2px; font-size:13px; font-weight:600;
+    letter-spacing:0.03em; transition:all .2s ease;
+  }
+  .nav-cta:hover{background:var(--cyan); color:var(--midnight-deep);}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:120px 0 140px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;
+  }
+  .eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--cyan-soft); margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:28px; height:1px; background:var(--cyan-soft);}
+  .hero h1{
+    font-size:48px; font-weight:700; margin-bottom:24px;
+  }
+  .hero h1 span{color:var(--cyan-soft);}
+  .hero p.lead{
+    font-size:17px; color:var(--silver); max-width:480px; margin-bottom:38px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cyan); color:var(--midnight-deep); font-weight:600; font-size:14px;
+    padding:15px 30px; border-radius:2px; letter-spacing:0.02em; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,255,255,0.18);}
+  .btn-ghost{
+    border:1px solid var(--card-border); color:var(--white); font-weight:600; font-size:14px;
+    padding:15px 30px; border-radius:2px; transition:border-color .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--silver);}
+
+  .hero-visual{position:relative; height:420px;}
+  .hero-visual svg{width:100%; height:100%;}
+  .node-glow{filter:drop-shadow(0 0 10px var(--cyan)) drop-shadow(0 0 22px rgba(0,255,255,0.5));}
+
+  /* CLIENT STRIP */
+  .client-strip{
+    background:var(--midnight-deep); border-bottom:1px solid var(--card-border);
+    padding:22px 0;
+  }
+  .client-strip-inner{
+    position:relative; max-width:1160px; margin:0 auto; padding:0 32px;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%);
+  }
+  .client-float-label{
+    font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--silver); text-align:center; margin-bottom:18px;
+  }
+  .client-logos{
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+  }
+  .client-logo{
+    font-family:'Montserrat'; font-weight:700; font-size:17px; letter-spacing:0.01em;
+    color:var(--silver); opacity:0.85; transition:opacity .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .client-logo:hover{opacity:1; color:var(--white);}
+  .client-logo .accent{color:var(--cyan-soft);}
+
+  /* SECTION LABELS */
+  .section{padding:100px 0;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-eyebrow{
+    font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--cyan-soft); margin-bottom:16px;
+  }
+  .section h2{font-size:32px; font-weight:700; margin-bottom:18px;}
+  .section-head p{font-size:16px; color:var(--silver);}
+
+  /* LIFECYCLE / SERVICES */
+  .lifecycle{background:var(--midnight-deep); border-top:1px solid var(--card-border); border-bottom:1px solid var(--card-border);}
+  .lifecycle-track{position:relative;}
+  .lifecycle-line{
+    position:absolute; top:29px; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, var(--card-border), var(--cyan-soft) 50%, var(--card-border));
+    opacity:0.5;
+  }
+  .lifecycle-steps{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:24px; position:relative;
+  }
+  .step{position:relative;}
+  .step-num{
+    width:58px; height:58px; border-radius:50%;
+    background:var(--midnight); border:1px solid var(--cyan-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Montserrat'; font-weight:700; font-size:15px; color:var(--cyan-soft);
+    margin-bottom:22px; position:relative; z-index:2;
+  }
+  .step h3{font-size:16px; margin-bottom:10px; line-height:1.3;}
+  .step p{font-size:13.5px; color:var(--silver);}
+
+  /* VALUE PILLARS */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--card-border); border:1px solid var(--card-border);}
+  .pillar{background:var(--midnight); padding:40px 34px;}
+  .pillar-icon{
+    width:40px; height:40px; margin-bottom:26px; position:relative;
+  }
+  .pillar h3{font-size:19px; margin-bottom:14px;}
+  .pillar p{font-size:14.5px; color:var(--silver);}
+
+  /* CASE STUDY */
+  .case-study{
+    background:var(--card); border:1px solid var(--card-border); border-radius:4px;
+    padding:56px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:stretch;
+  }
+  .case-tag{
+    display:inline-block; font-size:11.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--cyan-soft); border:1px solid var(--cyan-soft); padding:5px 12px; border-radius:2px; margin-bottom:20px;
+  }
+  .case-study h3{font-size:26px; margin-bottom:18px;}
+  .case-metrics{display:flex; gap:40px; margin-top:30px;}
+  .metric-num{font-family:'Montserrat'; font-weight:700; font-size:30px; color:var(--white); display:block;}
+  .metric-label{font-size:12.5px; color:var(--silver); letter-spacing:0.03em;}
+  .case-visual{position:relative; min-height:100%;}
+  .case-visual svg{width:100%; height:100%; display:block;}
+
+  /* ABOUT TEASER */
+  .about-teaser{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;
+  }
+  .founders{display:flex; flex-direction:column; gap:26px;}
+  .founder{display:flex; gap:16px; align-items:flex-start;}
+  .founder-mark{
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
+    background:var(--card); border:1px solid var(--card-border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Montserrat'; font-weight:700; font-size:14px; color:var(--cyan-soft);
+  }
+  .founder h4{font-size:15.5px; color:var(--white); margin-bottom:4px;}
+  .founder p{font-size:13.5px; color:var(--silver);}
+
+  /* CTA BAND */
+  .cta-band{
+    background:var(--midnight-deep); border-top:1px solid var(--card-border);
+    padding:110px 0; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-band h2{font-size:34px; max-width:600px; margin:0 auto 20px;}
+  .cta-band p{font-size:16px; color:var(--silver); max-width:480px; margin:0 auto 40px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--card-border); padding:48px 0;}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+  .footer-links{display:flex; gap:28px; font-size:13px; color:var(--silver);}
+  .footer-links a:hover{color:var(--cyan-soft);}
+  .footer-copy{font-size:12.5px; color:#5C6F7E;}
+
+  @media (max-width:920px){
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:280px; order:-1;}
+    .hero h1{font-size:36px;}
+    .pillars{grid-template-columns:1fr;}
+    .lifecycle-steps{grid-template-columns:repeat(2,1fr);}
+    .lifecycle-line{display:none;}
+    .case-study{grid-template-columns:1fr; padding:36px;}
+    .about-teaser{grid-template-columns:1fr; gap:40px;}
+    .client-strip-inner{-webkit-mask-image:linear-gradient(90deg, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%);}
+    .client-logos{justify-content:center; gap:20px 28px;}
+    .client-logo{font-size:14px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand" style="display:flex;align-items:center;gap:12px;">
+      <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
+        <path d="M15 68 L38 42 L50 55 L62 30 L85 68" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="85" cy="20" r="5" fill="#00FFFF"/>
+        <line x1="62" y1="30" x2="85" y2="20" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">VANTAGE POINT DIGITAL</span>
+    </a>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="case-studies.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="insights.html">Insights</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Book a call</a>
+  </div>
+</nav>
+
+<div class="client-strip">
+  <div class="client-strip-inner">
+    <div class="client-float-label">Previous engagements</div>
+    <div class="client-logos">
+      <span class="client-logo"><span class="accent">Colt</span> Technology Services</span>
+      <span class="client-logo"><span class="accent">BT</span> (British Telecom)</span>
+      <span class="client-logo">One<span class="accent">Savings</span> Bank</span>
+      <span class="client-logo"><span class="accent">Basware</span></span>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Digital &amp; AI transformation for private equity</div>
+      <h1>Every portfolio company has a <span>vantage point</span>. We help you find it.</h1>
+      <p class="lead">We partner with private equity firms and their portfolio companies to turn digital transformation and AI implementation into measurable, durable value, from due diligence through exit.</p>
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn-primary">Book a call</a>
+        <a href="services.html" class="btn-ghost">Explore services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="380" x2="380" y2="380" stroke="#123A5E" stroke-width="1"/>
+        <line x1="20" y1="300" x2="380" y2="300" stroke="#123A5E" stroke-width="1"/>
+        <line x1="20" y1="220" x2="380" y2="220" stroke="#123A5E" stroke-width="1"/>
+        <line x1="20" y1="140" x2="380" y2="140" stroke="#123A5E" stroke-width="1"/>
+        <polyline points="30,370 100,330 160,345 220,260 280,275 340,150 375,70"
+          stroke="#A9B7C0" stroke-width="1.5" fill="none" opacity="0.55"/>
+        <polyline points="30,390 90,360 150,300 210,310 260,210 320,190 375,70"
+          stroke="#00FFFF" stroke-width="2.5" fill="none" class="node-glow"/>
+        <circle cx="30" cy="390" r="4" fill="#00FFFF"/>
+        <circle cx="150" cy="300" r="4" fill="#00FFFF"/>
+        <circle cx="260" cy="210" r="4" fill="#00FFFF"/>
+        <circle cx="375" cy="70" r="7" fill="#00FFFF" class="node-glow"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="lifecycle">
+  <div class="wrap section">
+    <div class="section-head">
+      <div class="section-eyebrow">How we work</div>
+      <h2>Value creation across the full hold period</h2>
+      <p>Our service catalogue follows the arc of an investment, so the work compounds rather than resets at every stage.</p>
+    </div>
+    <div class="lifecycle-track">
+      <div class="lifecycle-line"></div>
+      <div class="lifecycle-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Tech, data &amp; operational due diligence</h3>
+          <p>A clear-eyed view of systems, data, and operational risk before capital commits.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Post-acquisition integration</h3>
+          <p>Aligning systems, teams, and processes fast, without disrupting the business.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Data &amp; AI transformation</h3>
+          <p>Turning fragmented data into AI-ready infrastructure and real operating leverage.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Portfolio value creation</h3>
+          <p>Ongoing efficiency and growth programmes across the hold period.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <h3>Exit readiness</h3>
+          <p>Positioning tech and data as a story that strengthens valuation, not a diligence risk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Why Vantage Point Digital</div>
+      <h2>Built for how PE actually operates</h2>
+      <p>We speak the language of investment committees and operating partners, and translate it into technology and AI programmes that portfolio teams can actually run.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none"><path d="M8 30 L18 18 L24 24 L32 10" stroke="#00FFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="10" r="3" fill="#00FFFF"/></svg>
+        <h3>Operational efficiency</h3>
+        <p>We identify where technology and process are quietly eroding EBITDA, and fix it in months, not years.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none"><rect x="6" y="20" width="6" height="12" stroke="#00FFFF" stroke-width="2"/><rect x="17" y="12" width="6" height="20" stroke="#00FFFF" stroke-width="2"/><rect x="28" y="6" width="6" height="26" stroke="#00FFFF" stroke-width="2"/></svg>
+        <h3>AI implementation</h3>
+        <p>Practical AI deployment grounded in real data readiness, not proof-of-concepts that never scale.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="#00FFFF" stroke-width="2"/><path d="M20 12 V20 L26 24" stroke="#00FFFF" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Speed to value</h3>
+        <p>We work on investment timelines, structured around the milestones that matter to your fund.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Case study</div>
+      <h2>Proof, not promises</h2>
+      <p>A closer look at how we work with portfolio companies, drawn from recent engagements.</p>
+    </div>
+    <div class="case-study">
+      <div>
+        <span class="case-tag">Post-acquisition integration</span>
+        <h3>Consolidating a fragmented systems landscape after a platform acquisition</h3>
+        <p>Following a series of bolt-on acquisitions, the portfolio company was running duplicate ERP, CRM, and reporting systems across business units. We led the integration roadmap, sequencing consolidation to protect operations while unlocking a single source of financial and operational truth.</p>
+        <div class="case-metrics">
+          <div><span class="metric-num">4</span><span class="metric-label">Systems consolidated</span></div>
+          <div><span class="metric-num">90 days</span><span class="metric-label">To first reporting milestone</span></div>
+        </div>
+      </div>
+      <div class="case-visual">
+        <svg viewBox="0 0 300 240" fill="none">
+          <circle cx="60" cy="50" r="18" stroke="#123A5E" stroke-width="2"/>
+          <circle cx="60" cy="130" r="18" stroke="#123A5E" stroke-width="2"/>
+          <circle cx="60" cy="210" r="18" stroke="#123A5E" stroke-width="2"/>
+          <line x1="78" y1="50" x2="200" y2="120" stroke="#123A5E" stroke-width="1.5"/>
+          <line x1="78" y1="130" x2="200" y2="120" stroke="#123A5E" stroke-width="1.5"/>
+          <line x1="78" y1="210" x2="200" y2="120" stroke="#123A5E" stroke-width="1.5"/>
+          <circle cx="220" cy="120" r="26" fill="#062A4D" stroke="#00FFFF" stroke-width="2.5" class="node-glow"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about-teaser">
+    <div>
+      <div class="section-eyebrow">About us</div>
+      <h2>A team that has sat inside the deals we now advise on</h2>
+      <p style="margin-top:18px; font-size:15.5px;">Vantage Point Digital was founded by operators who have led integrations, run portfolio-scale AI programmes, and delivered value creation from the inside of PE-backed businesses, not just advised on them from the outside.</p>
+      <a href="about.html" class="btn-ghost" style="display:inline-block; margin-top:32px;">Read our story</a>
+    </div>
+    <div class="founders">
+      <div class="founder">
+        <div class="founder-mark">PE</div>
+        <div>
+          <h4>Philip Enwonwu</h4>
+          <p>M&amp;A and integration management leadership, ERP and CRM delivery across SAP, NetSuite, and Salesforce, currently embedded across PE portfolio companies.</p>
+        </div>
+      </div>
+      <div class="founder">
+        <div class="founder-mark">OL</div>
+        <div>
+          <h4>Olga Magnusson</h4>
+          <p>Programme governance, product analytics, and Six Sigma-trained operational rigour, with PE-focused training.</p>
+        </div>
+      </div>
+      <div class="founder">
+        <div class="founder-mark">OR</div>
+        <div>
+          <h4>Omar K. Ramadan</h4>
+          <p>Operational value creation across portfolio-scale businesses in MEA markets, AI and automation builds, and vendor lifecycle management.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2>Ready to see where the value is hiding?</h2>
+    <p>Book a call with our team to talk through your portfolio, your timeline, and where digital transformation could move the needle.</p>
+    <a href="contact.html" class="btn-primary">Book a call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
+        <path d="M15 68 L38 42 L50 55 L62 30 L85 68" stroke="#A9B7C0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="85" cy="20" r="5" fill="#00FFFF"/>
+        <line x1="62" y1="30" x2="85" y2="20" stroke="#A9B7C0" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name" style="color:var(--silver);">VANTAGE POINT DIGITAL</span>
+    </div>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="case-studies.html">Case studies</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Vantage Point Digital. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
